@@ -19,24 +19,20 @@
 # product configuration (apps).
 #
 
-# Inherit from asus sm8250-common
--include device/asus/sm8250-common/BoardConfigCommon.mk
+# Inherit from asus sm8350-common
+-include device/asus/sm8350-common/BoardConfigCommon.mk
 
-DEVICE_PATH := device/asus/rog3
+DEVICE_PATH := device/asus/rog5
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Kernel
-TARGET_KERNEL_SOURCE := kernel/asus/rog3
-TARGET_KERNEL_CONFIG := vendor/rog3_defconfig
-
-# Properties
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TARGET_KERNEL_CONFIG := vendor/I005D_defconfig
 
 # Sepolicy
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 PRODUCT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/product/private
 
 # inherit from the proprietary version
--include vendor/asus/rog3/BoardConfigVendor.mk
+-include vendor/asus/rog5/BoardConfigVendor.mk

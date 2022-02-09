@@ -16,9 +16,9 @@
 cc_binary {
     relative_install_path: "hw",
     defaults: ["hidl_defaults"],
-    name: "omni.biometrics.fingerprint.inscreen@1.0-service.asus_kona",
-    vintf_fragments: ["omni.biometrics.fingerprint.inscreen@1.0-service.asus_kona.xml"],
-    init_rc: ["omni.biometrics.fingerprint.inscreen@1.0-service.asus_kona.rc"],
+    name: "omni.biometrics.fingerprint.inscreen@1.0-service.asus_lahaina",
+    vintf_fragments: ["omni.biometrics.fingerprint.inscreen@1.0-service.asus_lahaina.xml"],
+    init_rc: ["omni.biometrics.fingerprint.inscreen@1.0-service.asus_lahaina.rc"],
     srcs: ["service.cpp", "FingerprintInscreen.cpp"],
     system_ext_specific: true,
     shared_libs: [
@@ -28,6 +28,6 @@ cc_binary {
         "liblog",
         "libutils",
         "vendor.omni.biometrics.fingerprint.inscreen@1.0",
-        "//device/asus/rog3:vendor.goodix.hardware.biometrics.fingerprint@2.1",
+        "//device/asus/rog5:vendor.goodix.hardware.biometrics.fingerprint@2.1",
     ],
 }

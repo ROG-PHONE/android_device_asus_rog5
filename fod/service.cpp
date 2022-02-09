@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "omni.biometrics.fingerprint.inscreen@1.0-service.asus_kona"
+#define LOG_TAG "omni.biometrics.fingerprint.inscreen@1.0-service.asus_lahaina"
 
 #include <android-base/logging.h>
 #include <hidl/HidlTransportSupport.h>

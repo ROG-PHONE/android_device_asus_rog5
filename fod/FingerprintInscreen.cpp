@@ -20,12 +20,13 @@
 #include "FingerprintInscreen.h"
 #include <hidl/HidlTransportSupport.h>
 
-#define FOD_EVENT_PATH "/proc/driver/fod_event"
-#define FOD_WAKEUP_EVENT "33"
+#define GLOBAL_HBM_PATH "/proc/globalHbm"
+#define GLOBAL_HBM_ON "1"
+#define GLOBAL_HBM_OFF "0"
 
-#define LOCAL_HBM_MODE "/proc/localHbm"
-#define LOCAL_HBM_ON "1"
-#define LOCAL_HBM_OFF "0"
+#define FOD_TOUCHED_PATH "/sys/class/drm/fod_touched"
+#define FOD_TOUCHED_ON "1"
+#define FOD_TOUCHED_OFF "0"
 
 namespace vendor {
 namespace omni {
@@ -50,15 +51,15 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 Return<void> FingerprintInscreen::onPress() {
     this->mGoodixFingerprintDaemon->sendCommand(200001, {},
                                                 [](int, const hidl_vec<signed char>&) {});
-    android::base::WriteStringToFile(FOD_WAKEUP_EVENT, FOD_EVENT_PATH);
-    android::base::WriteStringToFile(LOCAL_HBM_ON, LOCAL_HBM_MODE);
+    android::base::WriteStringToFile(FOD_TOUCHED_ON, FOD_TOUCHED_PATH);
+    android::base::WriteStringToFile(GLOBAL_HBM_ON, GLOBAL_HBM_PATH);
     this->mGoodixFingerprintDaemon->sendCommand(200002, {},
                                                 [](int, const hidl_vec<signed char>&) {});
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
-    android::base::WriteStringToFile(LOCAL_HBM_OFF, LOCAL_HBM_MODE);
+    android::base::WriteStringToFile(GLOBAL_HBM_OFF, GLOBAL_HBM_PATH);
     this->mGoodixFingerprintDaemon->sendCommand(200003, {},
                                                 [](int, const hidl_vec<signed char>&) {});
     return Void();
@@ -69,7 +70,8 @@ Return<void> FingerprintInscreen::onShowFODView() {
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
-    android::base::WriteStringToFile(LOCAL_HBM_OFF, LOCAL_HBM_MODE);
+    android::base::WriteStringToFile(GLOBAL_HBM_OFF, GLOBAL_HBM_PATH);
+    android::base::WriteStringToFile(FOD_TOUCHED_OFF, FOD_TOUCHED_PATH);
     return Void();
 }
 
@@ -98,15 +100,15 @@ Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallb
 }
 
 Return<int32_t> FingerprintInscreen::getPositionX() {
-    return 410;
+    return 435;
 }
 
 Return<int32_t> FingerprintInscreen::getPositionY() {
-    return 1651;
+    return 1631;
 }
 
 Return<int32_t> FingerprintInscreen::getSize() {
-    return 260;
+    return 220;
 }
 
 }  // namespace implementation
